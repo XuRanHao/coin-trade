@@ -1,3 +1,4 @@
+﻿// 中文注释：配置说明。
 export const spacing = {
   xs: 4,
   sm: 8,

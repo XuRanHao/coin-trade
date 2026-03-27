@@ -1,3 +1,4 @@
+﻿// 中文注释：配置说明。
 import { defineConfig } from "tsup";
 
 export default defineConfig({

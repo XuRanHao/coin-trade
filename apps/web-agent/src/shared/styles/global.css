@@ -1,19 +1,61 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=Sora:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
 
-:root {
-  color-scheme: dark;
-  background: #0b1220;
+/* 中文注释：配置说明。 */
+:root,
+:root[data-theme="dark"] {
+  --cp-surface-primary: #0b0e11;
+  --cp-surface-secondary: #181a20;
+  --cp-surface-tertiary: #1e2329;
+  --cp-border-subtle: #2b3139;
+  --cp-text-primary: #eaecef;
+  --cp-text-secondary: #848e9c;
+  --cp-accent: #f0b90b;
+  --cp-accent-text: #1e2329;
+  --cp-price-up: #0ecb81;
+  --cp-price-down: #f6465d;
+  --cp-price-neutral: #848e9c;
+  --cp-prediction-bullish: #0ecb81;
+  --cp-prediction-neutral: #f0b90b;
+  --cp-prediction-bearish: #f6465d;
+  --cp-volume-bar: #475569;
+}
+
+/* 中文注释：配置说明。 */
+:root[data-theme="light"] {
+  --cp-surface-primary: #f5f7fa;
+  --cp-surface-secondary: #ffffff;
+  --cp-surface-tertiary: #f2f4f7;
+  --cp-border-subtle: #d0d7e2;
+  --cp-text-primary: #1e2329;
+  --cp-text-secondary: #6f7785;
+  --cp-accent: #f0b90b;
+  --cp-accent-text: #1e2329;
+  --cp-price-up: #009a61;
+  --cp-price-down: #cf304a;
+  --cp-price-neutral: #6f7785;
+  --cp-prediction-bullish: #009a61;
+  --cp-prediction-neutral: #f0b90b;
+  --cp-prediction-bearish: #cf304a;
+  --cp-volume-bar: #7c8aa1;
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* 中文注释：样式说明。 */
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 10% 15%, rgba(34, 211, 238, 0.12), transparent 38%),
-    radial-gradient(circle at 80% 0%, rgba(244, 63, 94, 0.12), transparent 40%),
-    #0b1220;
+  background: var(--cp-surface-primary);
+  color: var(--cp-text-primary);
+  font-family: "Sora", "Noto Sans SC", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
 }

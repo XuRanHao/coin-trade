@@ -1,17 +1,20 @@
-import { colors, radius, spacing, typography } from "@coin-platform/tokens";
+﻿import { colors, radius, spacing, typography } from "@coin-platform/tokens";
 import type { ReactNode } from "react";
 
+// 中文注释：类型定义说明。 (TabItem)
 export interface TabItem<T extends string> {
   label: ReactNode;
   value: T;
 }
 
+// 中文注释：类型定义说明。 (TabsProps)
 export interface TabsProps<T extends string> {
   items: TabItem<T>[];
   value: T;
   onChange: (value: T) => void;
 }
 
+// 中文注释：核心逻辑说明。 (Tabs)
 export function Tabs<T extends string>({ items, value, onChange }: TabsProps<T>) {
   return (
     <div
@@ -19,9 +22,9 @@ export function Tabs<T extends string>({ items, value, onChange }: TabsProps<T>)
         display: "inline-flex",
         gap: spacing.xs,
         padding: spacing.xs,
-        background: colors.surfacePrimary,
+        background: colors.surfaceSecondary,
         border: `1px solid ${colors.borderSubtle}`,
-        borderRadius: radius.lg
+        borderRadius: radius.md
       }}
     >
       {items.map((item) => {
@@ -36,7 +39,7 @@ export function Tabs<T extends string>({ items, value, onChange }: TabsProps<T>)
               borderRadius: radius.md,
               padding: `${spacing.xs}px ${spacing.md}px`,
               background: active ? colors.accent : "transparent",
-              color: active ? "#052025" : colors.textSecondary,
+              color: active ? colors.accentText : colors.textSecondary,
               fontFamily: typography.fontFamily,
               fontWeight: 600
             }}

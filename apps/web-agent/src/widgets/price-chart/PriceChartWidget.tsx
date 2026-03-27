@@ -6,26 +6,48 @@ import {
   type LineData,
   createChart
 } from "lightweight-charts";
-import { useEffect, useRef } from "react";
-import type { PredictionScenario } from "@/features/prediction/types";
+import { useEffect, useMemo, useRef } from "react";
 import type { PricePoint } from "@/features/market/types";
+import type { PredictionScenario } from "@/features/prediction/types";
+import { useAppPreferences } from "@/shared/preferences/AppPreferencesProvider";
 
+// 中文注释：类型定义说明。 (PriceChartWidgetProps)
 export interface PriceChartWidgetProps {
   points: PricePoint[];
   predictions?: PredictionScenario[];
 }
 
-const predictionColors: Record<PredictionScenario["type"], string> = {
-  bullish: colors.predictionBullish,
-  neutral: colors.predictionNeutral,
-  bearish: colors.predictionBearish
-};
+// 中文注释：核心逻辑说明。 (resolveCssColor)
+function resolveCssColor(value: string): string {
+  const matched = value.match(/^var\((--[^,\s)]+)\s*,\s*([^)]+)\)$/);
+  if (!matched || typeof window === "undefined") return value;
 
+  const cssVar = matched[1];
+  const fallback = matched[2].trim();
+  const computed = window.getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim();
+  return computed || fallback;
+}
+
+// 中文注释：核心逻辑说明。 (PriceChartWidget)
 export function PriceChartWidget({ points, predictions = [] }: PriceChartWidgetProps) {
+  const { theme } = useAppPreferences();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const priceSeriesRef = useRef<ISeriesApi<"Line"> | null>(null);
   const forecastSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
+
+  const palette = useMemo(
+    () => ({
+      surfaceSecondary: resolveCssColor(colors.surfaceSecondary),
+      textSecondary: resolveCssColor(colors.textSecondary),
+      borderSubtle: resolveCssColor(colors.borderSubtle),
+      accent: resolveCssColor(colors.accent),
+      bullish: resolveCssColor(colors.predictionBullish),
+      neutral: resolveCssColor(colors.predictionNeutral),
+      bearish: resolveCssColor(colors.predictionBearish)
+    }),
+    [theme]
+  );
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -35,15 +57,15 @@ export function PriceChartWidget({ points, predictions = [] }: PriceChartWidgetP
       layout: {
         background: {
           type: ColorType.Solid,
-          color: colors.surfaceSecondary
+          color: palette.surfaceSecondary
         },
-        textColor: colors.textSecondary
+        textColor: palette.textSecondary
       },
       rightPriceScale: {
-        borderColor: colors.borderSubtle
+        borderColor: palette.borderSubtle
       },
       timeScale: {
-        borderColor: colors.borderSubtle
+        borderColor: palette.borderSubtle
       },
       grid: {
         vertLines: { color: "rgba(148, 163, 184, 0.15)" },
@@ -52,7 +74,7 @@ export function PriceChartWidget({ points, predictions = [] }: PriceChartWidgetP
     });
 
     const priceSeries = chart.addLineSeries({
-      color: colors.accent,
+      color: palette.accent,
       lineWidth: 2
     });
 
@@ -65,10 +87,16 @@ export function PriceChartWidget({ points, predictions = [] }: PriceChartWidgetP
       priceSeriesRef.current = null;
       forecastSeriesRef.current = [];
     };
-  }, []);
+  }, [palette]);
 
   useEffect(() => {
     if (!priceSeriesRef.current || !chartRef.current) return;
+
+    const predictionColors: Record<PredictionScenario["type"], string> = {
+      bullish: palette.bullish,
+      neutral: palette.neutral,
+      bearish: palette.bearish
+    };
 
     const priceData: LineData[] = points.map((point) => ({
       time: point.time as LineData["time"],
@@ -95,7 +123,7 @@ export function PriceChartWidget({ points, predictions = [] }: PriceChartWidgetP
     });
 
     chartRef.current.timeScale().fitContent();
-  }, [points, predictions]);
+  }, [points, predictions, palette]);
 
   return <div ref={containerRef} style={{ width: "100%", height: 420 }} />;
 }

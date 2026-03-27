@@ -1,30 +1,33 @@
-import { colors, radius, spacing, typography } from "@coin-platform/tokens";
+﻿import { colors, radius, spacing, typography } from "@coin-platform/tokens";
 import clsx from "clsx";
 import type { ButtonHTMLAttributes, CSSProperties, PropsWithChildren } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
+// 中文注释：类型定义说明。 (ButtonProps)
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
 }
 
+// 中文注释：映射配置说明。
 const sizeMap: Record<ButtonSize, CSSProperties> = {
   sm: { height: 32, fontSize: 13, padding: `0 ${spacing.md}px` },
   md: { height: 40, fontSize: 14, padding: `0 ${spacing.lg}px` },
   lg: { height: 48, fontSize: 16, padding: `0 ${spacing.xl}px` }
 };
 
+// 中文注释：映射配置说明。
 const variantMap: Record<ButtonVariant, CSSProperties> = {
   primary: {
     background: colors.accent,
-    color: "#052025",
+    color: colors.accentText,
     border: "none"
   },
   secondary: {
-    background: colors.surfaceSecondary,
+    background: colors.surfaceTertiary,
     color: colors.textPrimary,
     border: `1px solid ${colors.borderSubtle}`
   },
@@ -40,6 +43,7 @@ const variantMap: Record<ButtonVariant, CSSProperties> = {
   }
 };
 
+// 中文注释：核心逻辑说明。 (Button)
 export function Button({
   children,
   variant = "primary",

@@ -1,4 +1,5 @@
-/** @type {import('jest').Config} */
+﻿/** @type {import('jest').Config} */
+// 中文注释：配置说明。
 module.exports = {
   testEnvironment: "jsdom",
   roots: ["<rootDir>/__tests__"],

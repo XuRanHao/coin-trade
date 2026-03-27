@@ -1,16 +1,21 @@
-import { colors, spacing, typography } from "@coin-platform/tokens";
-import { Card } from "../card/Card";
+import { colors, radius, spacing, typography } from "@coin-platform/tokens";
 
+// 中文注释：类型定义说明。 (StatCardProps)
 export interface StatCardProps {
   label: string;
   value: string;
 }
 
+// 中文注释：核心逻辑说明。 (StatCard)
 export function StatCard({ label, value }: StatCardProps) {
   return (
-    <Card
+    <article
       style={{
-        minWidth: 140
+        minWidth: 160,
+        background: colors.surfaceTertiary,
+        border: `1px solid ${colors.borderSubtle}`,
+        borderRadius: radius.md,
+        padding: spacing.lg
       }}
     >
       <p
@@ -28,11 +33,12 @@ export function StatCard({ label, value }: StatCardProps) {
           margin: `${spacing.sm}px 0 0`,
           color: colors.textPrimary,
           fontFamily: typography.monoFamily,
-          fontWeight: 700
+          fontWeight: 700,
+          fontSize: typography.size.md
         }}
       >
         {value}
       </p>
-    </Card>
+    </article>
   );
 }

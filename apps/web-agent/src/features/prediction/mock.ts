@@ -1,5 +1,6 @@
-import type { AssetPrediction, PredictionPoint } from "./types";
+﻿import type { AssetPrediction, PredictionPoint } from "./types";
 
+// 中文注释：核心逻辑说明。 (projectPoints)
 function projectPoints(base: PredictionPoint[], ratio: number): PredictionPoint[] {
   return base.map((point, index) => {
     const wave = 1 + Math.sin(index / 5) * 0.005;
@@ -10,6 +11,7 @@ function projectPoints(base: PredictionPoint[], ratio: number): PredictionPoint[
   });
 }
 
+// 中文注释：核心逻辑说明。 (createMockPrediction)
 export function createMockPrediction(symbol: string, points: PredictionPoint[]): AssetPrediction {
   const forecastBase = points.slice(-24);
   return {

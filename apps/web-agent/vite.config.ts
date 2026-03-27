@@ -1,3 +1,4 @@
+﻿// 中文注释：配置说明。
 import path from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";

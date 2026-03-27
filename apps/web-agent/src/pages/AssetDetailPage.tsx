@@ -4,11 +4,14 @@ import { formatPercentage, formatPrice, formatVolume } from "@coin-platform/util
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { fetchKlines, fetchTicker24h } from "@/shared/api/binance";
 import { createMockPrediction } from "@/features/prediction/mock";
+import { fetchKlines, fetchTicker24h } from "@/shared/api/binance";
+import { useAppPreferences } from "@/shared/preferences/AppPreferencesProvider";
 import { PriceChartWidget } from "@/widgets/price-chart/PriceChartWidget";
 
+// 中文注释：核心逻辑说明。 (AssetDetailPage)
 export function AssetDetailPage() {
+  const { t } = useAppPreferences();
   const params = useParams();
   const symbol = params.symbol ?? "BTCUSDT";
 
@@ -31,32 +34,35 @@ export function AssetDetailPage() {
 
   return (
     <section style={{ display: "grid", gap: spacing.xl }}>
-      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderBottom: `1px solid ${colors.borderSubtle}`,
+          paddingBottom: spacing.md
+        }}
+      >
         <div>
-          <h1 style={{ margin: 0, color: colors.textPrimary, fontFamily: typography.fontFamily }}>{symbol}</h1>
-          <p style={{ marginTop: spacing.sm, color: colors.textSecondary }}>
-            Price timeline + prediction overlay (agent-ready protocol placeholder).
-          </p>
+          <h1 style={{ margin: 0, color: colors.textPrimary, fontFamily: typography.fontFamily, fontSize: 34 }}>{symbol}</h1>
+          <p style={{ marginTop: spacing.sm, color: colors.textSecondary }}>{t("assetSubtitle")}</p>
         </div>
-        <Badge tone="warning">MVP</Badge>
+        <Badge tone="warning">{t("badgeAIForecast")}</Badge>
       </header>
 
       {tickerQuery.data ? (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: spacing.md }}>
-          <StatCard label="Last Price" value={formatPrice(tickerQuery.data.price)} />
-          <StatCard label="24h Change" value={formatPercentage(tickerQuery.data.changePercent24h)} />
-          <StatCard label="24h Volume" value={formatVolume(tickerQuery.data.volume24h)} />
+          <StatCard label={t("statLastPrice")} value={formatPrice(tickerQuery.data.price)} />
+          <StatCard label={t("stat24hChange")} value={formatPercentage(tickerQuery.data.changePercent24h)} />
+          <StatCard label={t("stat24hVolume")} value={formatVolume(tickerQuery.data.volume24h)} />
         </div>
       ) : null}
 
-      <ChartPanel
-        title="Price + Prediction"
-        extra={<span style={{ color: colors.textSecondary, fontSize: typography.size.sm }}>Interval: 1H</span>}
-      >
+      <ChartPanel title={t("chartTitle")} extra={<span>{t("intervalHour")}</span>}>
         {klineQuery.isLoading ? (
-          <p style={{ color: colors.textSecondary }}>Loading chart...</p>
+          <p style={{ color: colors.textSecondary }}>{t("loadingChart")}</p>
         ) : klineQuery.isError || !klineQuery.data?.length ? (
-          <EmptyState title="No chart data" description="Cannot load this symbol right now." />
+          <EmptyState title={t("emptyChartTitle")} description={t("emptyChartDesc")} />
         ) : (
           <PriceChartWidget points={klineQuery.data} predictions={prediction?.scenarios} />
         )}

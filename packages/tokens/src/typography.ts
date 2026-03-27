@@ -1,3 +1,4 @@
+﻿// 中文注释：配置说明。
 export const typography = {
   fontFamily: "'Sora', 'Noto Sans SC', sans-serif",
   monoFamily: "'JetBrains Mono', monospace",

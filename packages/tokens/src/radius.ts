@@ -1,3 +1,4 @@
+﻿// 中文注释：配置说明。
 export const radius = {
   sm: 6,
   md: 10,

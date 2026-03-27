@@ -1,12 +1,14 @@
-import { colors, spacing, typography } from "@coin-platform/tokens";
+﻿import { colors, spacing, typography } from "@coin-platform/tokens";
 import type { ReactNode } from "react";
 
+// 中文注释：类型定义说明。 (EmptyStateProps)
 export interface EmptyStateProps {
   title: string;
   description?: string;
   action?: ReactNode;
 }
 
+// 中文注释：核心逻辑说明。 (EmptyState)
 export function EmptyState({ title, description, action }: EmptyStateProps) {
   return (
     <div

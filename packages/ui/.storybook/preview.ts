@@ -1,3 +1,4 @@
+﻿// 中文注释：配置说明。
 import type { Preview } from "@storybook/react";
 
 const preview: Preview = {

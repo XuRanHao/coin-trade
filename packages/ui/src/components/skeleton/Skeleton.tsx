@@ -1,10 +1,12 @@
-import { colors, radius } from "@coin-platform/tokens";
+﻿import { colors, radius } from "@coin-platform/tokens";
 
+// 中文注释：类型定义说明。 (SkeletonProps)
 export interface SkeletonProps {
   width?: number | string;
   height?: number;
 }
 
+// 中文注释：核心逻辑说明。 (Skeleton)
 export function Skeleton({ width = "100%", height = 16 }: SkeletonProps) {
   return (
     <div
