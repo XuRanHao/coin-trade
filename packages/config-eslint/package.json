@@ -1,0 +1,13 @@
+{
+  "name": "@coin-platform/config-eslint",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    ".": "./index.cjs",
+    "./react": "./react.cjs"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": "^5.0.0"
+  }
+}

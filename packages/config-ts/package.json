@@ -1,0 +1,13 @@
+{
+  "name": "@coin-platform/config-ts",
+  "version": "0.0.1",
+  "private": true,
+  "files": [
+    "*.json"
+  ],
+  "exports": {
+    "./base": "./base.json",
+    "./react-app": "./react-app.json",
+    "./react-lib": "./react-lib.json"
+  }
+}

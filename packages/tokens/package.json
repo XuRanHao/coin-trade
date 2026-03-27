@@ -1,0 +1,23 @@
+{
+  "name": "@coin-platform/tokens",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --emitDeclarationOnly",
+    "dev": "tsc -w -p tsconfig.json --emitDeclarationOnly",
+    "lint": "eslint \"src/**/*.ts\"",
+    "test": "echo \"No tests for tokens\"",
+    "clean": "echo \"No clean step for tokens\""
+  },
+  "devDependencies": {
+    "@coin-platform/config-eslint": "workspace:*",
+    "@coin-platform/config-ts": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint": "^9.12.0",
+    "typescript": "^5.6.2"
+  }
+}

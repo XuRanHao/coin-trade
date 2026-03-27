@@ -1,0 +1,11 @@
+{
+  "extends": "../../packages/config-ts/react-app.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}
